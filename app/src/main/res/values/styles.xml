@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Base application theme. -->
+    <style name="revechatsdk_AppTheme.Base" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/revechatsdk_colorPrimary</item>
+        <item name="colorPrimaryDark">@color/revechatsdk_colorPrimaryDark</item>
+        <item name="colorAccent">@color/revechatsdk_colorPrimary</item>
+    </style>
+    <style name="revechatsdk_AppTheme.Base.NoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/revechatsdk_colorPrimary</item>
+        <item name="colorPrimaryDark">@color/revechatsdk_colorPrimaryDark</item>
+        <item name="colorAccent">@color/revechatsdk_colorPrimary</item>
+    </style>
+    <!-- ToolBar -->
+    <style name="revechatsdk_ToolBarStyle" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="android:textColorPrimary">@android:color/white</item>
+        <item name="android:textColorSecondary">@android:color/white</item>
+        <item name="android:background">@color/revechatsdk_colorPrimary</item>
+        <item name="android:elevation" tools:ignore="NewApi">0dp</item>
+    </style>
+
+    <style name="revechatsdk_NoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/revechatsdk_colorPrimary</item>
+        <item name="colorPrimaryDark">@color/revechatsdk_colorPrimaryDark</item>
+        <item name="colorAccent">@color/revechatsdk_colorPrimary</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="colorControlNormal">@color/revechatsdk_control_normal</item>
+        <item name="colorControlActivated">@color/revechatsdk_colorPrimary</item>
+        <item name="colorControlHighlight">@color/revechatsdk_control_normal</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
+
+    <style name="revechatsdk_menuThemeDefault" parent="Theme.AppCompat.Light.NoActionBar">
+
+        <item name="android:background">@android:color/white</item>
+        <item name="android:textColor">@android:color/black</item>
+
+    </style>
+
+
+    <!--    #5e3aef -->
+    <style name="revechatsdk_menuTheme_5e3aef" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:background">#5e3aef</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <!--    #0058bf-->
+    <style name="revechatsdk_menuTheme_0058bf" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:background">#0058bf</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+<!--#f17500-->
+    <style name="revechatsdk_menuTheme_f17500" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:background">#f17500</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+<!--   bright red #ff0b00 -->
+    <style name="revechatsdk_menuTheme_ff0b00" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:background">#ff0b00</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <!--  light red  #df4949 -->
+    <style name="revechatsdk_menuTheme_df4949" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:background">#df4949</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <!--  green  #149c52 -->
+    <style name="revechatsdk_menuTheme_149c52" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:background">#149c52</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <!--  dark blue  #4e6bb1 -->
+    <style name="revechatsdk_menuTheme_4e6bb1" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:background">#4e6bb1</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <!--  purple  #7835b0 -->
+    <style name="revechatsdk_menuTheme_7835b0" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:background">#7835b0</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <style name="revechatsdk_ButtonStyle" parent="Widget.AppCompat.Button">
+        <item name="android:background">@drawable/revechatsdk_button_style</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:paddingLeft">@dimen/revechatsdk_activity_horizontal_margin</item>
+        <item name="android:paddingRight">@dimen/revechatsdk_activity_horizontal_margin</item>
+        <item name="android:gravity">center_vertical|center_horizontal</item>
+        <item name="android:textSize">@dimen/revechatsdk_button_text_size</item>
+    </style>
+
+    <style name="revechatsdk_hr_vertical">
+        <item name="android:layout_width">0.5dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:background">#4D070707</item>
+    </style>
+
+    <style name="revechatsdk_ShapeAppearanceOverlay.CornerSize50Percent" parent="">
+        <item name="cornerSize">50%</item>
+    </style>
+    <style name="revechatsdk_ShapeAppearanceOverlay.CornerSize15Percent" parent="">
+        <item name="cornerSize">15%</item>
+    </style>
+
+    <style name="revechatsdk_AppTheme.Button" parent="Widget.MaterialComponents.Button">
+        <item name="android:layout_marginEnd" tools:ignore="NewApi">4dp</item>
+        <item name="android:layout_marginStart" tools:ignore="NewApi">4dp</item>
+        <item name="android:textColor">@color/revechatsdk_white</item>
+        <item name="backgroundTint">@color/revechatsdk_colorPrimary</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:stateListAnimator" tools:ignore="NewApi">
+            @animator/button_state_anim
+        </item>
+    </style>
+
+
+    <style name="revechatsdk_AppTheme.ButtonWithOutBgColor" parent="Widget.MaterialComponents.Button">
+        <item name="android:layout_marginEnd" tools:ignore="NewApi">4dp</item>
+        <item name="android:layout_marginStart" tools:ignore="NewApi">4dp</item>
+        <item name="android:textColor">@color/revechatsdk_white</item>
+<!--        <item name="backgroundTint">@color/revechatsdk_colorPrimary</item>-->
+        <item name="android:textSize">12sp</item>
+        <item name="android:stateListAnimator" tools:ignore="NewApi">
+            @animator/button_state_anim
+        </item>
+    </style>
+
+    <!--co-browse-->
+    <style name="revechatsdk_Theme.Transparent" parent="Theme.AppCompat">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:backgroundDimEnabled">false</item>
+    </style>
+
+</resources>

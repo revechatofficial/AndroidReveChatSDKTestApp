@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/revechatsdk_activity_horizontal_margin"
+        android:paddingTop="@dimen/revechatsdk_activity_vertical_margin"
+        android:paddingRight="@dimen/revechatsdk_activity_horizontal_margin"
+        android:paddingBottom="@dimen/revechatsdk_activity_vertical_margin"
+        tools:context="com.revesoft.revechat.MainActivity">
+
+        <AutoCompleteTextView
+            android:id="@+id/accountID"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/value40"
+            android:layout_marginTop="@dimen/revechatsdk_value30"
+            android:background="@drawable/revechatsdk_drawable_edittext_bg"
+            android:hint="Account Id (Required)"
+            android:inputType="number"
+            android:padding="@dimen/value5"
+            android:singleLine="true"
+            android:textSize="@dimen/revechatsdk_text16" />
+
+        <EditText
+            android:id="@+id/userName"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/value40"
+            android:layout_marginTop="@dimen/value15"
+            android:background="@drawable/revechatsdk_drawable_edittext_bg"
+            android:hint="Name (Required)"
+            android:inputType="textCapWords"
+            android:padding="@dimen/value5"
+            android:singleLine="true"
+            android:text="TestUser"
+            android:textSize="@dimen/revechatsdk_text16" />
+
+        <EditText
+            android:id="@+id/userEmail"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/value40"
+            android:layout_marginTop="@dimen/value15"
+            android:background="@drawable/revechatsdk_drawable_edittext_bg"
+            android:hint="Email (Required) "
+            android:inputType="textEmailAddress"
+            android:padding="@dimen/value5"
+            android:singleLine="true"
+            android:text="test@doman.com"
+            android:textSize="@dimen/revechatsdk_text16" />
+
+        <EditText
+            android:id="@+id/userPhone"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/value40"
+            android:layout_marginTop="@dimen/value15"
+            android:background="@drawable/revechatsdk_drawable_edittext_bg"
+            android:hint="Phone (Optional)"
+            android:inputType="phone"
+            android:padding="@dimen/value5"
+            android:singleLine="true"
+            android:textSize="@dimen/revechatsdk_text16" />
+
+
+        <Button
+            android:id="@+id/startChat"
+            style="@style/revechatsdk_ButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/revechatsdk_button_height"
+            android:layout_marginTop="@dimen/value30"
+            android:text="Start Chat"
+            android:textSize="@dimen/revechatsdk_text18" />
+
+
+    </LinearLayout>
+
+</RelativeLayout>
+
+
+
+
+
+
