@@ -15,7 +15,7 @@ dependencyResolutionManagement {
 2.  In application build.gradle file, add following dependency 
 
    dependencies {
-           implementation('com.revesoft.revechatsdk:revechatsdk:1.0.14.3.3') 
+           implementation('com.revesoft.revechatsdk:revechatsdk:1.0.14.3.3')
    }
    
    
