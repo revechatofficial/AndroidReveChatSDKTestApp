@@ -34,7 +34,7 @@ val visitorInfo: VisitorInfo = VisitorInfo.Builder()
 	.name("your name")
 	.email("your@email.com")
 	.phoneNumber("your number")
-        .appLoginState("false") //need to pass this value as true if user is already logged in client application(It wil not show prechat form then) or false by default
+        .appLoginState(LoginState.LOGGED_OUT) //need to pass this value as LoginState.LOGGED_IN if user is already logged in client application(It wil not show prechat form then) or false by default
 	.build()
 
 // et visitor info
@@ -61,7 +61,7 @@ VisitorInfo visitorInfo = new VisitorInfo.Builder()
 	.name("your name")
 	.email("your@email.com")
 	.phoneNumber("your number")
-        .appLoginState("false") //need to pass this value as true if user is already logged in client application(It wil not show prechat form then) or false by default
+        .appLoginState(LoginState.LOGGED_OUT) //need to pass this value as LoginState.LOGGED_IN if user is already logged in client application(It wil not show prechat form then) or false by default
 	.build();
  
 // Set visitor info
