@@ -8,6 +8,7 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.revesoft.revechatsdk.model.VisitorInfo
+import com.revesoft.revechatsdk.state.LoginState
 import com.revesoft.revechatsdk.ui.activity.ReveChatActivity
 import com.revesoft.revechatsdk.utils.ReveChat
 
@@ -49,6 +50,7 @@ class MainActivity : AppCompatActivity() {
             .name(name)
             .email(email)
             .phoneNumber(phone)
+            .appLoginState(LoginState.LOGGED_OUT)       // pass LoginState.LOGGED_IN if you don't want to show pre-chat form
             .build()
 
 
