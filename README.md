@@ -67,7 +67,7 @@ For JAVA
 // Initializing with account id
 ReveChat.init("account id");
 
-LoginState loginState = LoginState.LOGGED_IN;
+LoginState loginState = LoginState.LOGGED_OUT;
 boolean doNotShowPreChatForm = true;
 
 /**
