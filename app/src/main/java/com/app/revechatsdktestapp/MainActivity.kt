@@ -46,11 +46,23 @@ class MainActivity : AppCompatActivity() {
 
         ReveChat.init(accountId)
 
+
+        var loginState : LoginState = LoginState.LOGGED_OUT
+        var doNotShowPreChatForm = true  // dummy variable to demonstrate showing and not showing pre-chat form
+
+        /**
+         * if application don't need to show pre-chat form then need to set as
+         *      loginState = LoginState.LOGGED_IN
+         */
+        if (doNotShowPreChatForm)
+            loginState = LoginState.LOGGED_IN
+
+
         val visitorInfo: VisitorInfo = VisitorInfo.Builder()
             .name(name)
             .email(email)
             .phoneNumber(phone)
-            .appLoginState(LoginState.LOGGED_OUT)       // pass LoginState.LOGGED_IN if you don't want to show pre-chat form
+            .appLoginState(loginState)
             .build()
 
 
