@@ -29,12 +29,23 @@ For Kotlin
 // Initializing with account id
 ReveChat.init("account id")
 
+
+var loginState : LoginState = LoginState.LOGGED_OUT
+var doNotShowPreChatForm = true 
+
+/**
+ * if application don't need to show pre-chat form then need to set as
+ *      loginState = LoginState.LOGGED_IN
+ */
+if (doNotShowPreChatForm)
+  loginState = LoginState.LOGGED_IN
+
 // Creating visitor info
 val visitorInfo: VisitorInfo = VisitorInfo.Builder()
 	.name("your name")
 	.email("your@email.com")
 	.phoneNumber("your number")
-        .appLoginState("false") //need to pass this value as true if user is already logged in client application(It wil not show prechat form then) or false by default
+        .appLoginState(loginState) 
 	.build()
 
 // et visitor info
@@ -56,12 +67,23 @@ For JAVA
 // Initializing with account id
 ReveChat.init("account id");
 
+LoginState loginState = LoginState.LOGGED_OUT;
+boolean doNotShowPreChatForm = true;
+
+/**
+ * if application don't need to show pre-chat form then need to set as
+ *      loginState = LoginState.LOGGED_IN
+ */
+if (doNotShowPreChatForm)
+  loginState = LoginState.LOGGED_IN;
+
+  
 // Creating visitor info
 VisitorInfo visitorInfo = new VisitorInfo.Builder()
 	.name("your name")
 	.email("your@email.com")
 	.phoneNumber("your number")
-        .appLoginState("false") //need to pass this value as true if user is already logged in client application(It wil not show prechat form then) or false by default
+        .appLoginState(loginState)
 	.build();
  
 // Set visitor info
