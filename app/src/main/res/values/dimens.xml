@@ -22,7 +22,7 @@
 
     <dimen name="revechatsdk_activity_horizontal_margin">@dimen/revechatsdk_value16</dimen>
     <dimen name="revechatsdk_activity_vertical_margin">@dimen/revechatsdk_value16</dimen>
-    <dimen name="revechatsdk_button_height">@dimen/revechatsdk_value40</dimen>
+    <dimen name="revechatsdk_button_height">@dimen/revechatsdk_value50</dimen>
     <dimen name="revechatsdk_value1">1dp</dimen>
     <dimen name="revechatsdk_value2">2dp</dimen>
     <dimen name="revechatsdk_value3">3dp</dimen>

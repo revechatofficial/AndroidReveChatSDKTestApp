@@ -66,6 +66,15 @@
             android:textSize="@dimen/revechatsdk_text16" />
 
 
+        <CheckBox
+            android:id="@+id/login_state_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="?colorPrimary"
+            android:text="Check if user already logged in to app"/>
+
+
         <Button
             android:id="@+id/startChat"
             style="@style/revechatsdk_ButtonStyle"
@@ -74,6 +83,17 @@
             android:layout_marginTop="@dimen/value30"
             android:text="Start Chat"
             android:textSize="@dimen/revechatsdk_text18" />
+
+
+        <Button
+            android:id="@+id/logOut"
+            style="@style/revechatsdk_ButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/revechatsdk_button_height"
+            android:layout_marginTop="@dimen/value30"
+            android:text="Logout"
+            android:textSize="@dimen/revechatsdk_text18"
+            android:visibility="visible"/>
 
 
     </LinearLayout>

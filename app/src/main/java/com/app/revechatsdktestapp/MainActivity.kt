@@ -4,13 +4,18 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
 import android.widget.Button
+import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.revesoft.revechatsdk.model.VisitorInfo
+import com.revesoft.revechatsdk.service.REVEChatApiService
+//import com.revesoft.revechatsdk.service.REVEChatApiService
 import com.revesoft.revechatsdk.state.LoginState
 import com.revesoft.revechatsdk.ui.activity.ReveChatActivity
 import com.revesoft.revechatsdk.utils.ReveChat
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -18,6 +23,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var userNameEditText: EditText
     private lateinit var emailIdEditText: EditText
     private lateinit var phoneNumberEditText: EditText
+    private lateinit var loginStateCheckBox : CheckBox
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,10 +33,27 @@ class MainActivity : AppCompatActivity() {
         userNameEditText = findViewById(R.id.userName)
         emailIdEditText = findViewById(R.id.userEmail)
         phoneNumberEditText = findViewById(R.id.userPhone)
+        loginStateCheckBox = findViewById(R.id.login_state_checkbox)
 
         findViewById<Button>(R.id.startChat).setOnClickListener {
             startChat()
         }
+
+        findViewById<Button>(R.id.logOut).setOnClickListener {
+            logout()
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        stopService(Intent(this, REVEChatApiService::class.java))
+    }
+
+
+    private fun logout() {
+        val intent = Intent(REVEChatApiService.REVECHAT_SDK_INTENT_FILTER)
+        intent.putExtra(REVEChatApiService.LOGOUT_MESSAGE, "")
+        LocalBroadcastManager.getInstance(this).sendBroadcast(intent)
     }
 
     private fun startChat() {
@@ -47,14 +70,21 @@ class MainActivity : AppCompatActivity() {
         ReveChat.init(accountId)
 
 
-        var loginState : LoginState = LoginState.LOGGED_OUT
-        var doNotShowPreChatForm = true  // dummy variable to demonstrate showing and not showing pre-chat form
+//        var loginState : LoginState = LoginState.LOGGED_OUT
+//        var doNotShowPreChatForm = true  // dummy variable to demonstrate showing and not showing pre-chat form
+//
+//        /**
+//         * if application don't need to show pre-chat form then need to set as
+//         *      loginState = LoginState.LOGGED_IN
+//         */
+//        if (doNotShowPreChatForm)
+//            loginState = LoginState.LOGGED_IN
 
-        /**
-         * if application don't need to show pre-chat form then need to set as
-         *      loginState = LoginState.LOGGED_IN
-         */
-        if (doNotShowPreChatForm)
+
+        var loginState : LoginState = LoginState.LOGGED_OUT
+//        var doNotShowPreChatForm = true  // dummy variable to demonstrate showing and not showing pre-chat form
+
+        if (loginStateCheckBox.isChecked)
             loginState = LoginState.LOGGED_IN
 
 
@@ -69,5 +99,6 @@ class MainActivity : AppCompatActivity() {
         ReveChat.setVisitorInfo(visitorInfo)
 
         startActivity(Intent(this, ReveChatActivity::class.java))
+        startService(Intent(this, REVEChatApiService::class.java))
     }
 }
