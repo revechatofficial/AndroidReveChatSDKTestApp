@@ -15,6 +15,7 @@ import com.revesoft.revechatsdk.service.REVEChatApiService
 import com.revesoft.revechatsdk.state.LoginState
 import com.revesoft.revechatsdk.ui.activity.ReveChatActivity
 import com.revesoft.revechatsdk.utils.ReveChat
+import com.revesoft.revechatsdk.webrtc.WebRTCHandler
 
 
 class MainActivity : AppCompatActivity() {
@@ -46,7 +47,8 @@ class MainActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        stopService(Intent(this, REVEChatApiService::class.java))
+        if (!WebRTCHandler.INSTANCE.isWebRTCCallRunning)
+            stopService(Intent(this, REVEChatApiService::class.java))
     }
 
 
