@@ -30,6 +30,11 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
+    buildFeatures {
+        dataBinding  true
+        viewBinding true
+    }
 }
 
 dependencies {
@@ -42,6 +47,6 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 
-    implementation('com.revesoft.revechatsdk:revechatsdk:1.0.14.3.4-snapshot7')
-//    implementation('com.revesoft.revechatsdk:revechatsdk:1.0.14.3.5')
+    implementation('com.revesoft.revechatsdk:revechatsdk:3.0.1')
+//    implementation('com.revesoft.revechatsdk:revechatsdk:1.0.14.3.4-snapshot9')
 }
