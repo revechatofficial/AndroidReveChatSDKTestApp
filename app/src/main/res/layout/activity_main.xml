@@ -93,7 +93,7 @@
             android:layout_marginTop="@dimen/value30"
             android:text="Logout"
             android:textSize="@dimen/revechatsdk_text18"
-            android:visibility="visible"/>
+            android:visibility="gone"/>
 
 
     </LinearLayout>
