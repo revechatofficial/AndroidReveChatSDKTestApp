@@ -11,7 +11,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.revesoft.revechatsdk.model.VisitorInfo
 import com.revesoft.revechatsdk.service.REVEChatApiService
-//import com.revesoft.revechatsdk.service.REVEChatApiService
 import com.revesoft.revechatsdk.state.LoginState
 import com.revesoft.revechatsdk.ui.activity.ReveChatActivity
 import com.revesoft.revechatsdk.utils.ReveChat
@@ -47,15 +46,15 @@ class MainActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        if (!WebRTCHandler.INSTANCE.isWebRTCCallRunning)
+        if (!REVEChatApiService.isCallRunning())
             stopService(Intent(this, REVEChatApiService::class.java))
     }
 
 
     private fun logout() {
-        val intent = Intent(REVEChatApiService.REVECHAT_SDK_INTENT_FILTER)
-        intent.putExtra(REVEChatApiService.LOGOUT_MESSAGE, "")
-        LocalBroadcastManager.getInstance(this).sendBroadcast(intent)
+//        val intent = Intent(REVEChatApiService.REVECHAT_SDK_INTENT_FILTER)
+//        intent.putExtra(REVEChatApiService.LOGOUT_MESSAGE, "")
+//        LocalBroadcastManager.getInstance(this).sendBroadcast(intent)
     }
 
     private fun startChat() {
