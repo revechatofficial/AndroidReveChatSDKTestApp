@@ -46,11 +46,8 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 
-    implementation('com.revesoft.revechatsdk:revechatsdk:3.0.2')
+//    implementation('com.revesoft.revechatsdk:revechatsdk:3.0.2')
+//    implementation('com.revesoft.revechatsdk:revechatsdk:3.0.3')
+    implementation('com.revesoft.revechatsdk:revechatsdk:3.0.4-snapshot-1')
 
-//    implementation('com.revesoft.revechatsdk:revechatsdk:1.0.14.3.1')
-//    implementation('com.revesoft.revechatsdk:revechatsdk:1.0.14.3.1-snapshot-3')  // CBK old version using
-//    implementation('com.revesoft.revechatsdk:revechatsdk:1.0.14.3.6-snapshot6')  //before 1.0.14.3.6
-//    implementation('com.revesoft.revechatsdk:revechatsdk:1.0.14.3.6')  //before 1.0.14.3.6
-//    implementation('com.revesoft.revechatsdk:revechatsdk:1.0.14.3.4-snapshot9')  // spekond last version given
 }
