@@ -1,5 +1,6 @@
 package com.app.revechatsdktestapp
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
@@ -7,6 +8,7 @@ import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.revesoft.revechatsdk.model.VisitorInfo
@@ -99,7 +101,22 @@ class MainActivity : AppCompatActivity() {
 
         ReveChat.setVisitorInfo(visitorInfo)
 
-        startActivity(Intent(this, ReveChatActivity::class.java))
+        val intent = Intent(this, ReveChatActivity::class.java)
+        resultLauncher.launch(intent)
+//      startActivity(Intent(this, ReveChatActivity::class.java))
         startService(Intent(this, REVEChatApiService::class.java))
+
     }
+
+
+    private val resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+        result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+//          val resultData = result.data?.getStringExtra("key")
+            Toast.makeText(this, "RESULT_OK", Toast.LENGTH_SHORT).show()
+        } else {
+            Toast.makeText(this, "Operation Canceled", Toast.LENGTH_SHORT).show()
+        }
+    }
+
 }
