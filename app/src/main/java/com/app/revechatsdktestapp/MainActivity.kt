@@ -91,10 +91,13 @@ class MainActivity : AppCompatActivity() {
             loginState = LoginState.LOGGED_IN
 
 
+        val accessToken = "Basic eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHRlcm5hbF9zeXN0ZW1fZW1haWwiOiJ0ZXN0cUBnbWFpbC5jb20iLCJmaXJzdE5hbWUiOiIiLCJsYXN0TmFtZSI6IiIsImNvbXBhbnlfaWQiOjExMjksInVzZXJfbmFtZSI6InRlc3RxQGdtYWlsLmNvbSIsInNjb3BlIjpbInJlYWQiLCJ3cml0ZSJdLCJleHAiOjE3NDM4MjYyNDQsImF1dGhvcml0aWVzIjpbImNyZXciXSwianRpIjoiNjIwZmY2OWEtYjc3OS00ZjgzLThkMTEtOTA5MzBhYjc2OGMzIiwiY2xpZW50X2lkIjoid2ViIn0.QNGrQeEDUQyhAyqrg9SASVXxHxcbq62gNxR73-CsrTnn_lyufdoHr8-5UHQyrXO4ddUq9S3DNonp8VgrdiuH_oR2dwTZFy9mmwT7RbXcL33lke1hBitCIVLMXR8qyNPfBtRXTYgKYvbQVFu9hA3nlMBj4iFQb8VpAgYCo2isuFDdsTyV1T8Oevd40aecrP1PAImKVdNQVr9zJ9d-mhIrreo-4lxuhUC5cbHw1sC7xQkwk5rLWP8cMvxEBxizZVtuAoFsnjZTasMZXl6VMk61RR77fRpfbmWvmeG2FlQOiTBqlejh1Hv74ykuB9J0O18yTBKHxcwBuJUwACL81gWUOg"
+
         val visitorInfo: VisitorInfo = VisitorInfo.Builder()
             .name(name)
             .email(email)
             .phoneNumber(phone)
+            .accessToken(accessToken)
             .appLoginState(loginState)
             .build()
 
