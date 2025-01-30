@@ -37,7 +37,7 @@
             android:inputType="textCapWords"
             android:padding="@dimen/value5"
             android:singleLine="true"
-            android:text="TestUser"
+            android:text=""
             android:textSize="@dimen/revechatsdk_text16" />
 
         <EditText
@@ -50,7 +50,7 @@
             android:inputType="textEmailAddress"
             android:padding="@dimen/value5"
             android:singleLine="true"
-            android:text="test@doman.com"
+            android:text=""
             android:textSize="@dimen/revechatsdk_text16" />
 
         <EditText
@@ -72,7 +72,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:backgroundTint="?colorPrimary"
-            android:text="Check if user already logged in to app"/>
+            android:text="Check if user already logged in to app"
+
+            android:visibility="gone"/>
 
 
         <Button
