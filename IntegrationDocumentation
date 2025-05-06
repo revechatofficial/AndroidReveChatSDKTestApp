@@ -1,0 +1,101 @@
+// 3.1.4-prod_gg-8-snapshot-5
+
+1. In Manifest File, If Application class is not added then add it, for example
+
+<application
+        android:name=".MyApplication" />
+
+2. In Application Class, add REVEChatAppLifecycleObserver
+
+// Kotlin
+onCreate() {
+    ProcessLifecycleOwner.get().lifecycle.addObserver(REVEChatAppLifecycleObserver.INSTANCE)
+}
+
+// Java
+onCreate() {
+    ProcessLifecycleOwner.get().getLifecycle().addObserver(REVEChatAppLifecycleObserver.INSTANCE);
+}
+
+
+3. in MainActivity , onCreate() method call initiateReveChat()
+
+onCreate() {
+    initiateReveChat()
+}
+
+// Kotlin
+ private fun initiateReveChat() {
+        // test access token value
+        val accessToken =
+            "Basic eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHRlcm5hbF9zeXN0ZW1fZW1haWwiOiJ0ZXN0cUBnbWFpbC5jb20iLCJmaXJzdE5hbWUiOiIiLCJsYXN0TmFtZSI6IiIsImNvbXBhbnlfaWQiOjExMjksInVzZXJfbmFtZSI6InRlc3RxQGdtYWlsLmNvbSIsInNjb3BlIjpbInJlYWQiLCJ3cml0ZSJdLCJleHAiOjE3NDM4MjYyNDQsImF1dGhvcml0aWVzIjpbImNyZXciXSwianRpIjoiNjIwZmY2OWEtYjc3OS00ZjgzLThkMTEtOTA5MzBhYjc2OGMzIiwiY2xpZW50X2lkIjoid2ViIn0.QNGrQeEDUQyhAyqrg9SASVXxHxcbq62gNxR73-CsrTnn_lyufdoHr8-5UHQyrXO4ddUq9S3DNonp8VgrdiuH_oR2dwTZFy9mmwT7RbXcL33lke1hBitCIVLMXR8qyNPfBtRXTYgKYvbQVFu9hA3nlMBj4iFQb8VpAgYCo2isuFDdsTyV1T8Oevd40aecrP1PAImKVdNQVr9zJ9d-mhIrreo-4lxuhUC5cbHw1sC7xQkwk5rLWP8cMvxEBxizZVtuAoFsnjZTasMZXl6VMk61RR77fRpfbmWvmeG2FlQOiTBqlejh1Hv74ykuB9J0O18yTBKHxcwBuJUwACL81gWUOg"
+
+        ReveChat.init(accountId)
+
+        //create visitor info
+        val visitorInfo: VisitorInfo = VisitorInfo.Builder()
+            .name(userName) // set name
+            .email(userEmail)
+            .phoneNumber(userPhone)
+            .build()
+
+        visitorInfo.accessToken = accessToken // set access token if any
+
+        ReveChat.setVisitorInfo(visitorInfo)
+
+        ReveChat.setAppBundleName(BuildConfig.APPLICATION_ID)
+        ReveChat.setAppVersionNumber(BuildConfig.VERSION_NAME)
+        startService(Intent(this, REVEChatApiService::class.java))
+    }
+
+
+// Java
+
+ private void initiateReveChat() {
+        String accessToken = "Basic eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHRlcm5hbF9zeXN0ZW1fZW1haWwiOiJ0ZXN0cUBnbWFpbC5jb20iLCJmaXJzdE5hbWUiOiIiLCJsYXN0TmFtZSI6IiIsImNvbXBhbnlfaWQiOjExMjksInVzZXJfbmFtZSI6InRlc3RxQGdtYWlsLmNvbSIsInNjb3BlIjpbInJlYWQiLCJ3cml0ZSJdLCJleHAiOjE3NDM4MjYyNDQsImF1dGhvcml0aWVzIjpbImNyZXciXSwianRpIjoiNjIwZmY2OWEtYjc3OS00ZjgzLThkMTEtOTA5MzBhYjc2OGMzIiwiY2xpZW50X2lkIjoid2ViIn0.QNGrQeEDUQyhAyqrg9SASVXxHxcbq62gNxR73-CsrTnn_lyufdoHr8-5UHQyrXO4ddUq9S3DNonp8VgrdiuH_oR2dwTZFy9mmwT7RbXcL33lke1hBitCIVLMXR8qyNPfBtRXTYgKYvbQVFu9hA3nlMBj4iFQb8VpAgYCo2isuFDdsTyV1T8Oevd40aecrP1PAImKVdNQVr9zJ9d-mhIrreo-4lxuhUC5cbHw1sC7xQkwk5rLWP8cMvxEBxizZVtuAoFsnjZTasMZXl6VMk61RR77fRpfbmWvmeG2FlQOiTBqlejh1Hv74ykuB9J0O18yTBKHxcwBuJUwACL81gWUOg";
+
+        //Initializing with account id
+        ReveChat.init(getAccountId());
+
+
+        //set visitor info
+        VisitorInfo visitorInfo = getVisitorInfo(MainActivity.this);
+        visitorInfo.setAccessToken(accessToken);
+        ReveChat.setVisitorInfo(visitorInfo);
+
+
+        ReveChat.setAppBundleName(BuildConfig.APPLICATION_ID);
+        ReveChat.setAppVersionNumber(BuildConfig.VERSION_NAME);
+
+        startService(new Intent(this, REVEChatApiService.class));
+    }
+
+
+    5. Call UI, where what to show the chat window
+
+     //Java
+
+     startActivity(new Intent(this, ReveChatActivity.class));
+
+
+     // Kotlin
+        startActivity(Intent(this, ReveChatActivity::class.java))
+
+
+    6. Stop REVEChatApiService when application exit, from Main Activity onDestroy()
+
+    // Kotlin
+    override fun onDestroy() {
+            if (!REVEChatApiService.isCallRunning())
+            stopService(Intent(this, REVEChatApiService::class.java))
+
+              super.onDestroy();
+    }
+
+    // Java
+ protected void onDestroy() {
+        if (!REVEChatApiService.isCallRunning())
+            stopService(new Intent(this, REVEChatApiService.class));
+
+    super.onDestroy();
+    }

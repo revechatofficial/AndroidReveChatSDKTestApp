@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1081376570016",
+    "project_id": "revechatsdk-73613",
+    "storage_bucket": "revechatsdk-73613.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1081376570016:android:d3c1b1c805481cc66c27c5",
+        "android_client_info": {
+          "package_name": "com.app.revechatsdktestapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDZ9lKH4tv-ZDEJM1PNzpwiJ_8d61-1kws"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1081376570016:android:994697e78be07b626c27c5",
+        "android_client_info": {
+          "package_name": "com.revesoft.revechat"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDZ9lKH4tv-ZDEJM1PNzpwiJ_8d61-1kws"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

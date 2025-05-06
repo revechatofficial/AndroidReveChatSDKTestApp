@@ -1,20 +1,26 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'com.google.gms.google-services'
+
 }
 
 android {
     namespace 'com.app.revechatsdktestapp'
-    compileSdk 34
+    compileSdk 35
 
     defaultConfig {
         applicationId "com.app.revechatsdktestapp"
         minSdk 24
-        targetSdk 34
+        targetSdk 35
         versionCode 1
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildFeatures {
+        buildConfig = true
     }
 
     buildTypes {
@@ -41,7 +47,8 @@ android {
 }
 
 dependencies {
-    implementation 'androidx.core:core-ktx:1.7.0'
+//    implementation 'androidx.core:core-ktx:1.7.0'
+    implementation 'androidx.core:core-ktx:1.16.0'
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.8.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
@@ -49,6 +56,8 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 
+    implementation 'com.google.firebase:firebase-messaging:24.0.3'
 
-    implementation('com.revesoft.revechatsdk:revechatsdk:3.1.4-prod_gg-8')
+//    implementation('com.revesoft.revechatsdk:revechatsdk:3.1.4-prod_gg-9')
+    implementation('com.revesoft.revechatsdk:revechatsdk:3.2.1')
 }
