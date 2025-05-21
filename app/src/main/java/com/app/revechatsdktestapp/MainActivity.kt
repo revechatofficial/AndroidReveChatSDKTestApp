@@ -5,10 +5,8 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
-import android.text.TextUtils
 import android.widget.Button
 import android.widget.EditText
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -27,11 +25,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var phoneNumberEditText: EditText
 
 
-    private val accountId = "2552651"
-//    private val accountId = "4694569"
-//    private val accountId = "148773"
-//    private val accountId = "8663064"
-//    private val accountId = "2332725"
+    private val accountId = "2552651"  // USE YOUR ACCOUNT ID
     private val userName = "androidSDKLib"
     private val userEmail = "androidSDK@test.com"
     private val userPhone = ""
@@ -66,7 +60,7 @@ class MainActivity : AppCompatActivity() {
         phoneNumberEditText.setText(userPhone)
 
         findViewById<Button>(R.id.startChat).setOnClickListener {
-            startActivity(Intent(this, ReveChatActivity::class.java))
+            openChatWindow()
         }
 
         // this need to be called
@@ -80,8 +74,14 @@ class MainActivity : AppCompatActivity() {
     }
 
 
+    private fun openChatWindow() {
+        startActivity(Intent(this, ReveChatActivity::class.java))
+    }
+
+
+
     private fun initiateReveChat() {
-        // test access token value
+        // test access token value only
 //        val accessToken =
 //            "Basic eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHRlcm5hbF9zeXN0ZW1fZW1haWwiOiJ0ZXN0cUBnbWFpbC5jb20iLCJmaXJzdE5hbWUiOiIiLCJsYXN0TmFtZSI6IiIsImNvbXBhbnlfaWQiOjExMjksInVzZXJfbmFtZSI6InRlc3RxQGdtYWlsLmNvbSIsInNjb3BlIjpbInJlYWQiLCJ3cml0ZSJdLCJleHAiOjE3NDM4MjYyNDQsImF1dGhvcml0aWVzIjpbImNyZXciXSwianRpIjoiNjIwZmY2OWEtYjc3OS00ZjgzLThkMTEtOTA5MzBhYjc2OGMzIiwiY2xpZW50X2lkIjoid2ViIn0.QNGrQeEDUQyhAyqrg9SASVXxHxcbq62gNxR73-CsrTnn_lyufdoHr8-5UHQyrXO4ddUq9S3DNonp8VgrdiuH_oR2dwTZFy9mmwT7RbXcL33lke1hBitCIVLMXR8qyNPfBtRXTYgKYvbQVFu9hA3nlMBj4iFQb8VpAgYCo2isuFDdsTyV1T8Oevd40aecrP1PAImKVdNQVr9zJ9d-mhIrreo-4lxuhUC5cbHw1sC7xQkwk5rLWP8cMvxEBxizZVtuAoFsnjZTasMZXl6VMk61RR77fRpfbmWvmeG2FlQOiTBqlejh1Hv74ykuB9J0O18yTBKHxcwBuJUwACL81gWUOg"
 
