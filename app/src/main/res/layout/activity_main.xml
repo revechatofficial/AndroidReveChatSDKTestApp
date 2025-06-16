@@ -75,7 +75,7 @@
             android:backgroundTint="?colorPrimary"
             android:text="Check if user already logged in to app"
 
-            android:visibility="gone"/>
+            android:visibility="visible"/>
 
 
         <Button
