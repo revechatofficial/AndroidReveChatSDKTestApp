@@ -31,7 +31,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 
-class MainActivity : AppCompatActivity(), REVEChatEventListener {
+class MainActivity : AppCompatActivity() {  //, REVEChatEventListener
 
     private lateinit var accountIdEditText: EditText
     private lateinit var userNameEditText: EditText
@@ -82,7 +82,9 @@ class MainActivity : AppCompatActivity(), REVEChatEventListener {
 
         // this need to be called
         initiateReveChat()
-        initializeReveChatWebHook()
+
+        // for webhook integration
+//      initializeReveChatWebHook()
     }
 
     override fun onDestroy() {
@@ -135,164 +137,164 @@ class MainActivity : AppCompatActivity(), REVEChatEventListener {
     // WebHOOK integration
     private val TAG = "MainActivity"
 
-    private val ACCESS_TOKEN: String =
-        "Basic eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHRlcm5hbF9zeXN0ZW1fZW1haWwiOiJzaGl2NjBAeW9wbWFpbC5jb20iLCJmaXJzdE5hbWUiOiIiLCJsYXN0TmFtZSI6IiIsImNvbXBhbnlfaWQiOjExMjksInVzZXJfbmFtZSI6InNoaXY2MEB5b3BtYWlsLmNvbSIsInNjb3BlIjpbInJlYWQiLCJ3cml0ZSJdLCJleHAiOjE3NTI5OTExNTEsImF1dGhvcml0aWVzIjpbImNyZXciXSwianRpIjoiY2RmNjJjMTEtZWEyZC00MjJiLThmMDYtYmE3MGVhNmUyZTRhIiwiY2xpZW50X2lkIjoid2ViIn0.rwEvFuSGttr3WTw2Dd61gmH6V4G9MOQdwI6iHLg5swGazcw9_GvQITlHTpOXnpzgfljAfN9b_XB6FdelxnysO7vgqmbk7W-ZphCTUGktFWKAqIarEHKSBygFajI-zjGrGdXZqEjYiOM4y_KihjZLlp_1dtT4SBNv8Htzy9L44MfLxumpdB0OKR9FMUKnT1QElqcIZAL3ahQ6ZoMivMLfBYJAk584PobvKl-VBZ0aGYTFrnHglEzltf0O5AifER0ZYnNfOmLze8t2b51e9fK0I3zalytqKSszEvNu2Ox5SmO5Mq93OJU_lL-4qdE8LzmlJI2I9zboyHhqIZTRQwW6Vw"
-
-    private var reveChatBotId: String? = null
-    private var reveSessionId: String? = null
-
-
-    var USER_PREFERENCES: String = "revechat_registration_preferences"
-
-    private fun initializeReveChatWebHook() {
-        Log.i(TAG, "initializeReveChatWebHook() ++")
-        registerListener(this)
-
-        // restore bot id and session id values
-        val sharedPref = this.getSharedPreferences(USER_PREFERENCES, MODE_PRIVATE)
-        reveChatBotId = sharedPref.getString(REVEChatWebHook.REVECHAT_WEB_HOOK_BOT_ID, "")
-        reveSessionId = sharedPref.getString(REVEChatWebHook.REVECHAT_WEB_HOOK_SESSION_ID, "")
-
-        Log.i(TAG, "chatBotId = $reveChatBotId")
-        Log.i(TAG, "sessionId = $reveSessionId")
-
-        Log.i(TAG, "initializeReveChatWebHook() --")
-    }
-
-
-    private fun saveReveChatBotSessionInfo() {
-        val sharedPref = this.getSharedPreferences(USER_PREFERENCES, MODE_PRIVATE)
-        sharedPref.edit()
-            .putString(REVEChatWebHook.REVECHAT_WEB_HOOK_BOT_ID, reveChatBotId)
-            .putString(REVEChatWebHook.REVECHAT_WEB_HOOK_SESSION_ID, reveSessionId)
-            .apply()
-    }
-
-
-    override fun onWebHookEvent(scriptInfo: String?) {
-        Log.i(TAG, "onWebHookEvent() scriptInfo = $scriptInfo")
-        if (scriptInfo==null) return
-        try {
-            val parenStart = scriptInfo.indexOf('(')
-            val methodName = scriptInfo.substring(0, parenStart)
-
-            Log.i(TAG, "onWebHookEvent() methodName = $methodName")
-
-            val parenEnd = scriptInfo.lastIndexOf(')')
-            val argument = scriptInfo.substring(parenStart + 1, parenEnd)
-
-            Log.i(TAG, "onWebHookEvent() argument = $argument")
-
-            val inputObject = JSONObject(argument)
-            if (inputObject.has("chatbot_id")) {
-                reveChatBotId = inputObject.getString("chatbot_id")
-            }
-
-            if (inputObject.has("session_id")) {
-                reveSessionId = inputObject.getString("session_id")
-            }
-
-            Log.i(TAG, "onWebHookEvent() chatBotId = $reveChatBotId")
-            Log.i(TAG, "onWebHookEvent() sessionId = $reveSessionId")
-
-            if (!TextUtils.isEmpty(reveChatBotId) && !TextUtils.isEmpty(reveSessionId)) {
-                saveReveChatBotSessionInfo()
-                callGetGlobalRESTApi(reveChatBotId!!, reveSessionId!!)
-            }
-        } catch (exception: Exception) {
-            Log.e(TAG, "exception in onWebHookEvent() = $exception")
-        }
-    }
-
-    override fun onBotConversationFinished() {
-        reveChatBotId = ""
-        reveSessionId = ""
-        saveReveChatBotSessionInfo()
-    }
-
-
-    private fun callGetGlobalRESTApi(botId: String, sessionId: String) {
-        Log.i(TAG, "callGetGlobalRESTApi() ++")
-
-        val accessToken: String = ACCESS_TOKEN
-        Log.i(TAG, "accessToken = $accessToken")
-
-        if (accessToken != null && !TextUtils.isEmpty(accessToken)) {
-            val userService = userService
-            val call = userService.verifyToken(accessToken, "Reve")
-            call.enqueue(object : Callback<TokenVerifyResponse?> {
-                override fun onResponse(
-                    call: Call<TokenVerifyResponse?>,
-                    response: Response<TokenVerifyResponse?>
-                ) {
-                    if (response.isSuccessful && response.body() != null) {
-                        val tokenResponse = response.body()
-                        Log.d(TAG, "Status: = " + tokenResponse!!.status)
-                        Log.d(TAG, "Payload: = " + tokenResponse!!.payload)
-
-                        val gson = Gson()
-                        val payloadJson = gson.toJson(tokenResponse)
-                        handleWebHookEvent(botId, sessionId, payloadJson)
-                    } else {
-                        Toast.makeText(
-                            this@MainActivity,
-                            "Error getting payload json",
-                            Toast.LENGTH_LONG
-                        ).show()
-                    }
-                }
-
-                override fun onFailure(call: Call<TokenVerifyResponse?>, t: Throwable) {
-                    Log.e(TAG, "Failure: " + t.message)
-                    Toast.makeText(this@MainActivity, "API onFailure", Toast.LENGTH_LONG).show()
-                }
-            })
-        } else {
-            Log.e(TAG, "accessToken null or empty")
-            Toast.makeText(this@MainActivity, "Access token is empty or null", Toast.LENGTH_LONG)
-                .show()
-        }
-
-        Log.i(TAG, "callGetGlobalRESTApi() --")
-    }
-
-
-    private fun handleWebHookEvent(botId: String, sessionId: String, payload: String?) {
-        Log.i(TAG, "handleWebHookEvent()++")
-        try {
-            val reveChatWebHook = REVEChatWebHook.INSTANCE
-            val loginStatus: Boolean = getLoggedInStatus()
-            Log.i(TAG, "handleWebHookEvent() loginStatus = $loginStatus")
-
-            reveChatWebHook.setLoggedIn(loginStatus)
-            val data = if (payload == null) {
-                JSONObject() // empty data
-            } else {
-                JSONObject(payload)
-            }
-            Log.i(TAG, "handleWebHookEvent() data = $data")
-
-            reveChatWebHook.setData(data)
-
-            REVEChatWebHook.INSTANCE.loginToChatbot(botId, sessionId)
-        } catch (e: java.lang.Exception) {
-            Log.i(TAG, "handleWebHookEvent() exception = $e")
-        }
-        Log.i(TAG, "handleWebHookEvent()--")
-    }
-
-
-    private fun getLoggedInStatus(): Boolean {
-        // TODO: need to replace with actual implementation
-        return loginStateCheckBox.isChecked()
-    }
-
-    private fun dummyChangeLoginStateHandler() {
-        if (!TextUtils.isEmpty(reveChatBotId) && !TextUtils.isEmpty(reveSessionId)) {
-            // Need to call web hook api again
-            callGetGlobalRESTApi(reveChatBotId!!, reveSessionId!!)
-        }
-    }
+//    private val ACCESS_TOKEN: String =
+//        "Basic eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHRlcm5hbF9zeXN0ZW1fZW1haWwiOiJzaGl2NjBAeW9wbWFpbC5jb20iLCJmaXJzdE5hbWUiOiIiLCJsYXN0TmFtZSI6IiIsImNvbXBhbnlfaWQiOjExMjksInVzZXJfbmFtZSI6InNoaXY2MEB5b3BtYWlsLmNvbSIsInNjb3BlIjpbInJlYWQiLCJ3cml0ZSJdLCJleHAiOjE3NTI5OTExNTEsImF1dGhvcml0aWVzIjpbImNyZXciXSwianRpIjoiY2RmNjJjMTEtZWEyZC00MjJiLThmMDYtYmE3MGVhNmUyZTRhIiwiY2xpZW50X2lkIjoid2ViIn0.rwEvFuSGttr3WTw2Dd61gmH6V4G9MOQdwI6iHLg5swGazcw9_GvQITlHTpOXnpzgfljAfN9b_XB6FdelxnysO7vgqmbk7W-ZphCTUGktFWKAqIarEHKSBygFajI-zjGrGdXZqEjYiOM4y_KihjZLlp_1dtT4SBNv8Htzy9L44MfLxumpdB0OKR9FMUKnT1QElqcIZAL3ahQ6ZoMivMLfBYJAk584PobvKl-VBZ0aGYTFrnHglEzltf0O5AifER0ZYnNfOmLze8t2b51e9fK0I3zalytqKSszEvNu2Ox5SmO5Mq93OJU_lL-4qdE8LzmlJI2I9zboyHhqIZTRQwW6Vw"
+//
+//    private var reveChatBotId: String? = null
+//    private var reveSessionId: String? = null
+//
+//
+//    var USER_PREFERENCES: String = "revechat_registration_preferences"
+//
+//    private fun initializeReveChatWebHook() {
+//        Log.i(TAG, "initializeReveChatWebHook() ++")
+//        registerListener(this)
+//
+//        // restore bot id and session id values
+//        val sharedPref = this.getSharedPreferences(USER_PREFERENCES, MODE_PRIVATE)
+//        reveChatBotId = sharedPref.getString(REVEChatWebHook.REVECHAT_WEB_HOOK_BOT_ID, "")
+//        reveSessionId = sharedPref.getString(REVEChatWebHook.REVECHAT_WEB_HOOK_SESSION_ID, "")
+//
+//        Log.i(TAG, "chatBotId = $reveChatBotId")
+//        Log.i(TAG, "sessionId = $reveSessionId")
+//
+//        Log.i(TAG, "initializeReveChatWebHook() --")
+//    }
+//
+//
+//    private fun saveReveChatBotSessionInfo() {
+//        val sharedPref = this.getSharedPreferences(USER_PREFERENCES, MODE_PRIVATE)
+//        sharedPref.edit()
+//            .putString(REVEChatWebHook.REVECHAT_WEB_HOOK_BOT_ID, reveChatBotId)
+//            .putString(REVEChatWebHook.REVECHAT_WEB_HOOK_SESSION_ID, reveSessionId)
+//            .apply()
+//    }
+//
+//
+//    override fun onWebHookEvent(scriptInfo: String?) {
+//        Log.i(TAG, "onWebHookEvent() scriptInfo = $scriptInfo")
+//        if (scriptInfo==null) return
+//        try {
+//            val parenStart = scriptInfo.indexOf('(')
+//            val methodName = scriptInfo.substring(0, parenStart)
+//
+//            Log.i(TAG, "onWebHookEvent() methodName = $methodName")
+//
+//            val parenEnd = scriptInfo.lastIndexOf(')')
+//            val argument = scriptInfo.substring(parenStart + 1, parenEnd)
+//
+//            Log.i(TAG, "onWebHookEvent() argument = $argument")
+//
+//            val inputObject = JSONObject(argument)
+//            if (inputObject.has("chatbot_id")) {
+//                reveChatBotId = inputObject.getString("chatbot_id")
+//            }
+//
+//            if (inputObject.has("session_id")) {
+//                reveSessionId = inputObject.getString("session_id")
+//            }
+//
+//            Log.i(TAG, "onWebHookEvent() chatBotId = $reveChatBotId")
+//            Log.i(TAG, "onWebHookEvent() sessionId = $reveSessionId")
+//
+//            if (!TextUtils.isEmpty(reveChatBotId) && !TextUtils.isEmpty(reveSessionId)) {
+//                saveReveChatBotSessionInfo()
+//                callGetGlobalRESTApi(reveChatBotId!!, reveSessionId!!)
+//            }
+//        } catch (exception: Exception) {
+//            Log.e(TAG, "exception in onWebHookEvent() = $exception")
+//        }
+//    }
+//
+//    override fun onBotConversationFinished() {
+//        reveChatBotId = ""
+//        reveSessionId = ""
+//        saveReveChatBotSessionInfo()
+//    }
+//
+//
+//    private fun callGetGlobalRESTApi(botId: String, sessionId: String) {
+//        Log.i(TAG, "callGetGlobalRESTApi() ++")
+//
+//        val accessToken: String = ACCESS_TOKEN
+//        Log.i(TAG, "accessToken = $accessToken")
+//
+//        if (accessToken != null && !TextUtils.isEmpty(accessToken)) {
+//            val userService = userService
+//            val call = userService.verifyToken(accessToken, "Reve")
+//            call.enqueue(object : Callback<TokenVerifyResponse?> {
+//                override fun onResponse(
+//                    call: Call<TokenVerifyResponse?>,
+//                    response: Response<TokenVerifyResponse?>
+//                ) {
+//                    if (response.isSuccessful && response.body() != null) {
+//                        val tokenResponse = response.body()
+//                        Log.d(TAG, "Status: = " + tokenResponse!!.status)
+//                        Log.d(TAG, "Payload: = " + tokenResponse!!.payload)
+//
+//                        val gson = Gson()
+//                        val payloadJson = gson.toJson(tokenResponse)
+//                        handleWebHookEvent(botId, sessionId, payloadJson)
+//                    } else {
+//                        Toast.makeText(
+//                            this@MainActivity,
+//                            "Error getting payload json",
+//                            Toast.LENGTH_LONG
+//                        ).show()
+//                    }
+//                }
+//
+//                override fun onFailure(call: Call<TokenVerifyResponse?>, t: Throwable) {
+//                    Log.e(TAG, "Failure: " + t.message)
+//                    Toast.makeText(this@MainActivity, "API onFailure", Toast.LENGTH_LONG).show()
+//                }
+//            })
+//        } else {
+//            Log.e(TAG, "accessToken null or empty")
+//            Toast.makeText(this@MainActivity, "Access token is empty or null", Toast.LENGTH_LONG)
+//                .show()
+//        }
+//
+//        Log.i(TAG, "callGetGlobalRESTApi() --")
+//    }
+//
+//
+//    private fun handleWebHookEvent(botId: String, sessionId: String, payload: String?) {
+//        Log.i(TAG, "handleWebHookEvent()++")
+//        try {
+//            val reveChatWebHook = REVEChatWebHook.INSTANCE
+//            val loginStatus: Boolean = getLoggedInStatus()
+//            Log.i(TAG, "handleWebHookEvent() loginStatus = $loginStatus")
+//
+//            reveChatWebHook.setLoggedIn(loginStatus)
+//            val data = if (payload == null) {
+//                JSONObject() // empty data
+//            } else {
+//                JSONObject(payload)
+//            }
+//            Log.i(TAG, "handleWebHookEvent() data = $data")
+//
+//            reveChatWebHook.setData(data)
+//
+//            REVEChatWebHook.INSTANCE.loginToChatbot(botId, sessionId)
+//        } catch (e: java.lang.Exception) {
+//            Log.i(TAG, "handleWebHookEvent() exception = $e")
+//        }
+//        Log.i(TAG, "handleWebHookEvent()--")
+//    }
+//
+//
+//    private fun getLoggedInStatus(): Boolean {
+//        // TODO: need to replace with actual implementation
+//        return loginStateCheckBox.isChecked()
+//    }
+//
+//    private fun dummyChangeLoginStateHandler() {
+//        if (!TextUtils.isEmpty(reveChatBotId) && !TextUtils.isEmpty(reveSessionId)) {
+//            // Need to call web hook api again
+//            callGetGlobalRESTApi(reveChatBotId!!, reveSessionId!!)
+//        }
+//    }
 
 
 }
