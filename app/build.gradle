@@ -52,5 +52,5 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
     implementation 'com.google.firebase:firebase-messaging:24.0.3'
 
-    implementation('com.revesoft.revechatsdk:revechatsdk:3.2.3')
+    implementation('com.revesoft.revechatsdk:revechatsdk:3.2.7')
 }
