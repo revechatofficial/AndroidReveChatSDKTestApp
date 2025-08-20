@@ -120,6 +120,11 @@ class MainActivity : AppCompatActivity() {  //, REVEChatEventListener
 
         ReveChat.setAppBundleName(BuildConfig.APPLICATION_ID)
         ReveChat.setAppVersionNumber(BuildConfig.VERSION_NAME)
+
+        ReveChat.setApiServiceTitle("REVEChatApiService")  // change as per your requirement
+        ReveChat.setApiServiceContent("REVEChatApiService") // change as per your requirement
+
+
         startService(Intent(this, REVEChatApiService::class.java))
     }
 
